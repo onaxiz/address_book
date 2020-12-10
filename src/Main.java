@@ -16,7 +16,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("ru/petproject/javafx/phonesbook/forms/mainwindow.fxml"));
-        fxmlLoader.setResources(ResourceBundle.getBundle("ru/petproject/javafx/phonesbook/bundles/Locale", new Locale("ru")));
+        fxmlLoader.setResources(ResourceBundle.getBundle("ru/petproject/javafx/phonesbook/bundles/Locale", new Locale("en")));
 
 
         //Parent root = FXMLLoader.load(getClass().getResource("ru/petproject/javafx/phonesbook/forms/mainwindow.fxml"));
