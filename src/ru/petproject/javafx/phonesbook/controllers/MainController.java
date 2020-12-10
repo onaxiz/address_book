@@ -4,6 +4,7 @@ import javafx.collections.ListChangeListener;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -19,12 +20,13 @@ import ru.petproject.javafx.phonesbook.objects.Person;
 
 import javax.crypto.spec.PSource;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class MainController {
+public class MainController implements Initializable {
     private CollectionAddressBook addressBookImpl = new CollectionAddressBook();
 
     private Stage mainStage;
-
 
     @FXML
     private TableColumn<Person, String> columnPhone;
@@ -52,6 +54,8 @@ public class MainController {
     @FXML
     private Button btnAdd;
 
+    private ResourceBundle resourceBundle;
+
     private Parent fxmlEdit;
     private FXMLLoader fxmlLoader = new FXMLLoader();
     private EditController editDialogController;
@@ -62,8 +66,9 @@ public class MainController {
         this.mainStage = mainStage;
     }
 
-    @FXML
-    private void initialize() {
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        this.resourceBundle = resources;
         columnFIO.setCellValueFactory(new PropertyValueFactory<Person, String>("fio"));
         columnPhone.setCellValueFactory(new PropertyValueFactory<Person, String>("phone"));
         initListeners();
@@ -111,7 +116,7 @@ public class MainController {
     }
 
     private void updateCountLabel() {
-        labelCount.setText("Количество записей: " + addressBookImpl.getPersonsList().size());
+        labelCount.setText(resourceBundle.getString("amount")+ addressBookImpl.getPersonsList().size());
     }
 
     public void actionButtonPressed(ActionEvent actionEvent) {
@@ -149,7 +154,7 @@ public class MainController {
 
         if (editDialogStage == null) {
             editDialogStage = new Stage();
-            editDialogStage.setTitle("Редактирование записи");
+            editDialogStage.setTitle(resourceBundle.getString("edit"));
             editDialogStage.setMinHeight(150);
             editDialogStage.setMinWidth(300);
             editDialogStage.setResizable(false);
@@ -161,5 +166,4 @@ public class MainController {
         editDialogStage.showAndWait(); // для ожидания закрытия окна
 
     }
-
 }
